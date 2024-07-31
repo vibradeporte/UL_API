@@ -12,7 +12,9 @@ app.version = "0.0.1"
 
 # Configuración de CORS
 origins = [
-    "https://elasistenteia.com"
+    "https://elasistenteia.com",
+    "file:///C:/Users/sergi/OneDrive/Documents/Universal_Learning/Documentos/CARGUE_ARCHIVOS_BOTPRESS_API/web_bot.html",
+    "C:/Users/sergi/OneDrive/Documents/Universal_Learning/Documentos/CARGUE_ARCHIVOS_BOTPRESS_API/web_bot.html"
     # Agrega aquí cualquier otro origen que necesites permitir
 ]
 
