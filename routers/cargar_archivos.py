@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Request, File, UploadFile
 from fastapi.responses import JSONResponse
 import os
 from datetime import datetime
+import pytz
 from jwt_manager import JWTBearer
 
 cargar_archivos = APIRouter()
@@ -12,8 +13,9 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
     temp_dir = "static/temp_files"
     os.makedirs(temp_dir, exist_ok=True)
 
-    # Obtener la fecha y hora actual para agregar al nombre del archivo
-    now = datetime.now().strftime("%Y%m%d%H%M%S")
+    # Obtener la fecha y hora actual en la zona horaria de Colombia
+    colombia_tz = pytz.timezone('America/Bogota')
+    now = datetime.now(colombia_tz).strftime("%Y%m%d%H%M%S")
     
     # Crear el nuevo nombre del archivo con la fecha y hora
     new_filename = f"{os.path.splitext(file.filename)[0]}_{now}{os.path.splitext(file.filename)[1]}"
