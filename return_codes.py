@@ -1,13 +1,16 @@
-SIN_INFORMACION = 452
+INCORRECTO = 452
+CORRECTO = 200
 
 
 HTTP_MESSAGES = {
 
-    SIN_INFORMACION: "No se encontró información sobre ese id en la base de datos."
+    CORRECTO: "El archivo fue cargado correctamente.",
+    INCORRECTO: "No se pudo cargar el archivo. Por favor inténtelo de nuevo."
+    
 }
 
 """
  ## **Códigos retornados:**
-        - 452 -> No se encontró información sobre ese id en la base de datos.
+        - 200 -> El archivo fue cargado correctamente.
                
 """
