@@ -12,5 +12,6 @@ HTTP_MESSAGES = {
 """
  ## **Códigos retornados:**
         - 200 -> El archivo fue cargado correctamente.
+        - 452 -> No se pudo cargar el archivo. Por favor inténtelo de nuevo.
                
 """
