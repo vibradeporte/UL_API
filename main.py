@@ -6,17 +6,26 @@ from fastapi.staticfiles import StaticFiles
 import requests
 from routers.cargar_archivos import cargar_archivos
 
-
-
 app = FastAPI()
 app.title = "Universal Learning API"
 app.version = "0.0.1"
 
+# Configuración de CORS
+origins = [
+    "https://elasistenteia.com"
+    # Agrega aquí cualquier otro origen que necesites permitir
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(userlog_router)
-
 app.include_router(cargar_archivos)
-
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
