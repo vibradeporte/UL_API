@@ -9,7 +9,7 @@ from routers.cargar_archivos import cargar_archivos
 
 
 app = FastAPI()
-app.title = "ASISTENTE COMERCIAL API"
+app.title = "Universal Learning API"
 app.version = "0.0.1"
 
 
