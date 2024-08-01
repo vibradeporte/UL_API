@@ -5,6 +5,8 @@ from routers.userlog import userlog_router
 from fastapi.staticfiles import StaticFiles
 import requests
 from routers.cargar_archivos import cargar_archivos
+from routers.correos import correo_archivo_adjunto_router
+from routers.transcribe import transcribe_app
 
 app = FastAPI()
 app.title = "Universal Learning API"
@@ -12,7 +14,11 @@ app.version = "0.0.1"
 
 # Configuración de CORS
 origins = [
-    "https://elasistenteia.com"
+    "https://elasistenteia.com",
+    "https://fastapitesting-production.up.railway.app/",
+    "https://fastapi-production-e76b.up.railway.app/",
+    "https://adminmoodle-production-98d3.up.railway.app/",
+    "https://asistentecomercial-production.up.railway.app/"
     # Agrega aquí cualquier otro origen que necesites permitir
 ]
 
@@ -26,6 +32,10 @@ app.add_middleware(
 
 app.include_router(userlog_router)
 app.include_router(cargar_archivos)
+
+app.include_router(transcribe_app)
+app.include_router(correo_archivo_adjunto_router)
+
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
