@@ -6,6 +6,7 @@ import os
 from return_codes import *
 import re
 from typing import List
+from jwt_manager import JWTBearer
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
@@ -18,7 +19,7 @@ class MessageRequest(BaseModel):
     numero: str
     parametros: List[str]
 
-@envio_mensajes_whatsapp_router.post("/envio_mensajes_whatsapp")
+@envio_mensajes_whatsapp_router.post("/envio_mensajes_whatsapp",tags=['whatsapp'], status_code=200, dependencies=[Depends(JWTBearer())])
 async def send_messages(plantilla: str, id_telefono: str, mensajes: List[MessageRequest]=None):
     """
     ## **Descripción:**
