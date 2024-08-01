@@ -9,6 +9,18 @@ cargar_archivos = APIRouter()
 
 @cargar_archivos.post("/cargar_archivos/", dependencies=[Depends(JWTBearer())])
 async def upload_file(request: Request, file: UploadFile = File(...)):
+    """
+    ## **Descripción:**
+    Esta función permite cargar archivos al API de UL en la ruta https://ulapi-production.up.railway.app/static/temp_files/.
+
+    ## **Parámetros obligatorios:**
+        - file -> Documento que se va a cargar al API.
+
+    ## **Códigos retornados:**
+        - 200 -> La operación se realizó correctamente.
+        - 452 -> No se pudo realizar la operación.
+        
+    """
     # Directorio temporal
     temp_dir = "static/temp_files"
     os.makedirs(temp_dir, exist_ok=True)

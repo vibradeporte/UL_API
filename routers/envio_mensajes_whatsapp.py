@@ -25,10 +25,14 @@ async def send_messages(plantilla: str, id_telefono: str, mensajes: List[Message
     Esta función permite enviar mensajes a whatsapp colectivamente.
 
     ## **Parámetros obligatorios:**
+        - plantilla -> Nombre de la plantilla creada previamente en el API de WhatsApp.
+        - id_telefono -> Id del número desde el cual se van a enviar los mensajes.
         - mensajes -> Lista de objetos que contiene todos los campos a enviar en la plantilla.
 
     ## **Códigos retornados:**
         - 200 -> Los mensajes se enviaron correctamente.
+        - 453 -> 
+        - 454 -> 
     """
     regex = r'^[0-9]+$'
     

@@ -10,14 +10,21 @@ import os
 load_dotenv()
 transcribe_app = APIRouter()
 
-
-
-
 Authorization = os.getenv("OPENAI_API_KEY")
-
 
 @transcribe_app.post("/transcribe/", dependencies=[Depends(JWTBearer())])
 async def transcribe_audio(file: UploadFile = File(...)):
+    """
+    ## **Descripción:**
+    Esta función permite transcribir audio a texto a partir de un archivo.
+
+    ## **Parámetros obligatorios:**
+        - file -> Archivo con el audio a transcribir.
+        
+    ## **Códigos retornados:**
+        - 200 -> La operación se realizó correctamente.
+
+    """
     url = "https://api.openai.com/v1/audio/transcriptions"
     headers = {
         "Authorization": f"Bearer {Authorization}"

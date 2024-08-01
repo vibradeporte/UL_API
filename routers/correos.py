@@ -37,6 +37,30 @@ correo_archivo_adjunto_router = APIRouter()
 
 @correo_archivo_adjunto_router.post("/enviar_correos_archivo_adjunto", tags=['correo'], status_code=200, dependencies=[Depends(JWTBearer())])
 def enviar_correos(batch: EmailBatchSchema):
+    """
+    ## **Descripción:**
+    Esta función permite enviar correos electrónicos usando SMTP TURBO.
+
+    ## **Parámetros obligatorios:**
+        - from -> Dirección de correo eléctronico desde donde se enviará el mensaje.
+        - to -> Dirección de correo eléctronico destinatario del mensaje.
+        - subject -> Asunto del mensaje.
+        - content -> Texto con el contenido del cuerpo del correo.
+    ## **Parámetros opcionales:**
+        - cc -> Enviar copia del mensaje a otro destinatario.
+        - bcc -> Enviar copia del mensaje a otro destinatario en oculto.
+        
+        - html_content -> Contenido del cuerpo del correo en formato HTML.
+        - attachments -> En caso de necesitar anexar un documento al mensaje, deberá ser ingresado por medio de attachments con los siguientes parámetros:
+            - content -> Corresponde al archivo en base64.
+            - name -> Corresponde al nombre del archivo.
+            - type -> Corresponde al tipo de archivo.
+
+    ## **Códigos retornados:**
+        - 200 -> La operación se realizó correctamente.
+        - 452 -> No se pudo realizar la operación.
+        
+    """
     if not AUTH_USER_TSMTP or not AUTH_PASS_TSMTP or not AUTH_KEY:
         raise HTTPException(status_code=500, detail="Missing email authentication credentials")
 
@@ -91,6 +115,18 @@ def enviar_correos(batch: EmailBatchSchema):
 #Servicio para realizar verificacion de correos con la plataforma millionviewer
 @correo_archivo_adjunto_router.get("/verificar_email/", tags=['correo'], status_code=200, dependencies=[Depends(JWTBearer())])
 def verificar_correo(email: str = Query(max_length=MAX_LENGTH_CORREO)):
+    """
+    ## **Descripción:**
+    Esta función permite verificar la calidad de un correo electrónico.
+
+    ## **Parámetros obligatorios:**
+        - email -> Dirección de correo eléctronico a validar.
+        
+
+    ## **Códigos retornados:**
+        - 200 -> Datos del análisis del correo electrónico ingresado.
+        - 500 -> Error en la solicitud a MillionVerifier
+    """
     url = f"https://api.millionverifier.com/api/v3/?api={MVAPI_KEY}&email={email}&timeout=20"
     try:
         response = requests.get(url)
