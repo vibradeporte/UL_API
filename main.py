@@ -9,6 +9,8 @@ from routers.correos import correo_archivo_adjunto_router
 from routers.transcribe import transcribe_app
 from routers.envio_mensajes_whatsapp import envio_mensajes_whatsapp_router
 from routers.sms import sms_router
+from routers.desencriptar_contraseña import desencriptar_contraseñas_router
+from routers.encriptar_contraseña import encriptar_contraseñas_router
 
 app = FastAPI()
 app.title = "Universal Learning API"
@@ -40,6 +42,9 @@ app.include_router(correo_archivo_adjunto_router)
 app.include_router(envio_mensajes_whatsapp_router)
 
 app.include_router(sms_router)
+
+app.include_router(encriptar_contraseñas_router)
+app.include_router(desencriptar_contraseñas_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
